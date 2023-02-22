@@ -1,11 +1,10 @@
 import PropTypes from 'prop-types';
 import css from '../Statistics/Statistics.module.css';
-import getRandomHexColor from '../Statistics/GetRandomHexColor';
-export const Statistics = ({ data }) => {
+import getRandomHexColor from './GetRandomHexColor';
+export const Statistics = ({ title, data }) => {
   return (
     <section className={css.statistics}>
-      <h2 className={css.title}>Upload stats</h2>
-
+      {title && <h2 className={css.title}>{title}</h2>}
       <ul className={css.statList}>
         {data.map(({ id, label, percentage }) => (
           <li
@@ -23,11 +22,12 @@ export const Statistics = ({ data }) => {
 };
 
 Statistics.propTypes = {
+  title: PropTypes.string,
   data: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,
       label: PropTypes.string.isRequired,
       percentage: PropTypes.number.isRequired,
-    })
-  ),
+    }).isRequired
+  ).isRequired,
 };
